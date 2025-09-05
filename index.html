@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Code Redeemer</title>
+  <title>Duolingo Code Redeemer</title>
   <style>
     :root{
       --bg: #0f172a;        /* slate-900 */
@@ -81,15 +81,12 @@
       font-weight: 600;
     }
     .msg.show { display: flex; }
-    .small { font-size: .86rem; color: var(--muted); margin-top: 10px; }
-    a { color: #93c5fd; text-decoration: none; }
-    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <main class="card" role="main">
-    <h1>Redeem Duolingo code</h1>
-    <p>Type your Duolingo activation code in the text box below.</p>
+    <h1>Duolingo Code Redeemer</h1>
+    <p>Enter your code and click Redeem.</p>
 
     <form id="redeem-form" autocomplete="off">
       <div class="field">
@@ -110,8 +107,6 @@
       </svg>
       <span>Code has been redeemed.</span>
     </div>
-
-    <div class="small">Hosting as:<strong>index.html</strong> on GitHub, powered by duolingo</div>
   </main>
 
   <script>
@@ -120,19 +115,14 @@
     const statusBox = document.getElementById('status');
     const button = document.getElementById('redeem-btn');
 
-    // Show success as soon as the user types anything
-    input.addEventListener('input', () => {
-      if (input.value.length > 0) {
+    // Only show success when form is submitted
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value.trim().length > 0) {
         statusBox.classList.add('show');
       } else {
         statusBox.classList.remove('show');
       }
-    });
-
-    // Also show success on submit (button click / Enter)
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      statusBox.classList.add('show');
       // Optional: visually confirm by disabling button briefly
       button.disabled = true;
       setTimeout(() => { button.disabled = false; }, 600);
